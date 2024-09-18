@@ -1,0 +1,1 @@
+# ansible-role-OBS-Studio-to-Nginx-Restreamer-template
