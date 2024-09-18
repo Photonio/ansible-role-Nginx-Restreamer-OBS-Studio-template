@@ -1,0 +1,7 @@
+---
+# vars file for try
+
+obs_cfg: ".config/obs-studio"
+
+# Tmp
+server_ip: 192.168.122.173

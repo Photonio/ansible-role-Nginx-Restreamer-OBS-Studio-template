@@ -1,0 +1,26 @@
+---
+
+- name: Create OBS Studio config directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.USER }}/{{ obs_cfg }}/{{ item.from }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - { from: "basic/profiles/{{ profile }}", end: "" }
+
+- name: Template OBS Studio stream to RTMP custom server
+  ansible.builtin.template:
+    src: "{{ template }}/{{ obs_cfg }}/{{ item.from }}{{ item.end }}"
+    dest: "{{ ansible_env.USER }}/{{ obs_cfg }}/{{ item.from }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: '0755'
+  with_items:
+    - { from: "basic/profiles/{{ profile }}/basic.ini", end: "" }
+    - { from: "basic/profiles/{{ profile }}/service.json", end: ".j2" }
+    - { from: "basic/profiles/{{ profile }}/streamEncoder.json", end: "" }
+    - { from: "global.ini", end: "" }
+
+
+# Not Necessary: Scene
+# - { from: "basic/scenes/Untitled.json", end: "" }

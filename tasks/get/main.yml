@@ -1,0 +1,6 @@
+---
+
+- name: Get Server IP
+  set_fact:
+    server_ip: "{{ hostvars[item]['ansible_default_ipv4']['address'] }}"
+  with_items: "{{ groups['server'][0] }}"
